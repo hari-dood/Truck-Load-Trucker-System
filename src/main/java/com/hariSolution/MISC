@@ -1,0 +1,186 @@
+
+
+
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+
+    private String getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // Check if the principal is an instance of UserDetails (used in most cases)
+            Object principal = authentication.getPrincipal();
+
+            if (principal instanceof UserDetails) {
+                return ((UserDetails) principal).getUsername();
+            } else {
+                // If the principal is not an instance of UserDetails, it's often the username directly
+                return principal.toString();
+            }
+        }
+
+    // Fallback to a default value in case no user is authenticated
+    return "system";  // or you could return null or some default name
+}
+----------------------------------------------
+
+
+
+
+
+@PrePersist
+public void prePersist() {
+    LocalDateTime now = LocalDateTime.now();
+    this.createdDate = now;
+    this.modifiedDate = now;
+    // Fetch current user from SecurityContext
+    this.createdBy = getCurrentUser();
+    this.modifiedBy = this.createdBy;
+}
+
+@PreUpdate
+public void preUpdate() {
+    this.modifiedDate = LocalDateTime.now();
+    // Fetch current user from SecurityContext
+    this.modifiedBy = getCurrentUser();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this.roleRepository.findByName(roleDto.getName()).ifPresentOrElse(
+    role -> {
+        // If the role is already registered, return the conflict response
+        return authResponseService.createResponse(
+                "Role is already registered",
+                "Please try a different role.",
+                HttpStatus.CONFLICT
+        );
+    },
+    () -> {
+        // If the role is not present, you can proceed with your role creation logic
+        // For example, saving the role
+        roleRepository.save(new RoleInfo(roleDto.getName(), roleDto.getDescription()));
+        // You can return a success response if needed here
+    }
+);
+
+
+
+
+
+
+
+
+@EnableWebSecurity
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .authorizeRequests()
+                .antMatchers("/login", "/register").permitAll() // Allow anonymous access
+                .anyRequest().authenticated() // Require authentication for other requests
+            .and()
+            .formLogin()
+                .loginPage("/login") // Custom login page
+                .permitAll()
+            .and()
+            .logout()
+                .permitAll();
+    }
+}
+------------------------------------------------------------------------------------------------------------
+
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class AuditEntity {
+
+    private static final Logger logger = LoggerFactory.getLogger(AuditEntity.class);
+
+    private String getCurrentUser() {
+        try {
+            // Retrieve the current authentication context
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            // If the authentication object is not null and the user is authenticated
+            if (authentication != null && authentication.isAuthenticated()) {
+
+                // Get the principal, which represents the currently authenticated user
+                Object principal = authentication.getPrincipal();
+
+                // If the principal is an instance of UserDetails, we can retrieve the username
+                if (principal instanceof UserDetails) {
+                    UserDetails userDetails = (UserDetails) principal;
+                    logger.info("Authenticated user: {}", userDetails.getUsername());
+                    return userDetails.getUsername();
+                } else {
+                    // In some cases (e.g., JWT authentication), the principal might be a simple username string
+                    logger.info("Authenticated user: {}", principal.toString());
+                    return principal.toString();
+                }
+            } else {
+                // If there is no authentication, log the issue and return a default value
+                logger.warn("No authentication found. Returning default 'system' user.");
+                return "system";  // Fallback user (could be null, or a default name like "system")
+            }
+        } catch (Exception e) {
+            // Log any unexpected errors and return a default value
+            logger.error("Error retrieving current user: ", e);
+            return "system"; // Fallback user in case of an error
+        }
+    }
+}
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+
+public class JwtAuthenticationToken extends UsernamePasswordAuthenticationToken {
+    public JwtAuthenticationToken(String principal, Object credentials) {
+        super(principal, credentials);
+    }
+
+    // Custom method to access more info if needed
+    public String getUsernameFromToken() {
+        return (String) getPrincipal();
+    }
+}
+
+private String getCurrentUser() {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+    if (authentication != null && authentication.isAuthenticated()) {
+        Object principal = authentication.getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
+        } else if (principal instanceof JwtAuthenticationToken) {
+            // For JWT authentication, get the username directly from the token
+            return ((JwtAuthenticationToken) principal).getUsernameFromToken();
+        }
+
+        return principal.toString();
+    }
+
+    return "system"; // Fallback for unauthenticated users
+}
+
+DataIntegrityViolationException:

@@ -1,0 +1,98 @@
+2025-01-11 17:56:23 - Starting TruckLoadManagementSystemApplication using Java 17.0.12 with PID 13648 (C:\Users\Admin\Desktop\TLMS\Truck-load-management-system\target\classes started by Admin in C:\Users\Admin\Desktop\TLMS\Truck-load-management-system)
+2025-01-11 17:56:23 - No active profile set, falling back to 1 default profile: "default"
+2025-01-11 17:56:34 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-11 17:56:34 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-01-11 17:56:36 - Finished Spring Data repository scanning in 1713 ms. Found 7 JPA repository interfaces.
+2025-01-11 17:56:36 - Multiple Spring Data modules found, entering strict repository configuration mode
+2025-01-11 17:56:36 - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2025-01-11 17:56:36 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.hariSolution.repository.DriverRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-01-11 17:56:36 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.hariSolution.repository.FileTransferRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-01-11 17:56:36 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.hariSolution.repository.LogRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-01-11 17:56:36 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.hariSolution.repository.RoleRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-01-11 17:56:36 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.hariSolution.repository.ShadowTripRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-01-11 17:56:36 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.hariSolution.repository.TripRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-01-11 17:56:36 - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.hariSolution.repository.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2025-01-11 17:56:36 - Finished Spring Data repository scanning in 256 ms. Found 0 Redis repository interfaces.
+2025-01-11 17:56:43 - Tomcat initialized with port 8080 (http)
+2025-01-11 17:56:43 - Starting service [Tomcat]
+2025-01-11 17:56:43 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-01-11 17:56:44 - Initializing Spring embedded WebApplicationContext
+2025-01-11 17:56:44 - Root WebApplicationContext: initialization completed in 20550 ms
+2025-01-11 17:56:45 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-01-11 17:56:46 - HHH000412: Hibernate ORM core version 6.6.4.Final
+2025-01-11 17:56:46 - HHH000026: Second-level cache disabled
+2025-01-11 17:56:48 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-01-11 17:56:48 - HikariPool-1 - Starting...
+2025-01-11 17:56:49 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4cd5fc46
+2025-01-11 17:56:49 - HikariPool-1 - Start completed.
+2025-01-11 17:56:49 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-01-11 17:56:49 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.2
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-01-11 17:56:57 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-01-11 17:57:02 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-01-11 17:57:08 - Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-01-11 17:57:08 - Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+2025-01-11 17:57:12 - Initializing Redis Connection Factory...
+2025-01-11 17:57:13 - Configuring RedisTemplate...
+2025-01-11 17:57:14 - Initializing Redis Cache Manager with custom configurations...
+2025-01-11 17:57:14 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-01-11 17:57:22 - Tomcat started on port 8080 (http) with context path '/'
+2025-01-11 17:57:22 - Started TruckLoadManagementSystemApplication in 62.742 seconds (process running for 67.635)
+2025-01-11 17:58:25 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-01-11 17:58:25 - Initializing Servlet 'dispatcherServlet'
+2025-01-11 17:58:25 - Completed initialization in 3 ms
+2025-01-11 17:58:26 - API=/auth/register | Method=POST | Status=500 | Duration=1019 ms | Request={
+  "username": "gobinath_anbazhagan",
+  "password": "Anbu@1234",
+  "email": "gobinathAnbu@gmail.com",
+  "roles": ["ADMIN", "USER"]
+} | Response={"data":{"message":"Unexpected error: No authenticated user found"},"status_details":{"status_message":"INTERNAL_SERVER_ERROR","requestId":"c895008f-5791-487e-a546-294df6e26f9f","_server_timestamp":"2025-01-11T12:28:26.167410800Z","status":"Internal Server Error","statusCode":500}}
+2025-01-11 17:58:26 - Logged Request and Response for URI: /auth/register
+2025-01-11 17:58:45 - Computed cache key 'Gobinath' for operation Builder[public java.lang.String com.hariSolution.service.TokenGenerateService.generateToken(com.hariSolution.model.UserInfo)] caches=[shortLivedCache] | key='#loginRequest.username' | keyGenerator='' | cacheManager='cacheManager' | cacheResolver='' | condition='' | unless='#result == null' | sync='false'
+2025-01-11 17:58:46 - No cache entry for key 'Gobinath' in cache(s) [shortLivedCache]
+2025-01-11 17:58:47 - Creating cache entry for key 'Gobinath' in cache(s) [shortLivedCache]
+2025-01-11 17:58:47 - API=/auth/login | Method=POST | Status=200 | Duration=1825 ms | Request={
+  "username": "Gobinath",
+  "password": "gobi@123"
+  
+} | Response=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJHb2JpbmF0aCIsInJvbGVzIjoiVVNFUixBRE1JTiIsImlhdCI6MTczNjU5ODUyNywiZXhwIjoxNzM2Njg0OTI3fQ.anKwI8p38cejdjw-mRbujLRdcqQHOQ0iW8Os3e8jKqlZaVTgp0h7c76zqTRwd1uSNYkCMpPy9akm5-y7-rU0-w
+2025-01-11 17:58:47 - Logged Request and Response for URI: /auth/login
+2025-01-11 17:59:45 - API=/auth/register | Method=POST | Status=200 | Duration=177 ms | Request={
+  "username": "gobinath_anbazhagan",
+  "password": "Anbu@1234",
+  "email": "gobinathAnbu@gmail.com",
+  "roles": ["ADMIN", "USER"]
+} | Response={"status_details":{"responseDetails":{"details":"The user has been added to the system and is now active.","message":"User registered successfully"},"timestamp":"2025-01-11T12:29:45.082597Z","status":"OK","statusCode":200}}
+2025-01-11 17:59:45 - Logged Request and Response for URI: /auth/register
+2025-01-11 18:00:40 - API=/auth/register | Method=POST | Status=409 | Duration=11 ms | Request={
+  "username": "gobinath_anbazhagan",
+  "password": "Anbu@1234",
+  "email": "gobinathAnbu@gmail.com",
+  "roles": ["ADMIN", "USER"]
+} | Response={"status_details":{"responseDetails":{"details":"Please try a different username.","message":"Username is already taken"},"timestamp":"2025-01-11T12:30:40.835806500Z","status":"CONFLICT","statusCode":409}}
+2025-01-11 18:00:40 - Logged Request and Response for URI: /auth/register
+2025-01-11 18:01:45 - API=/auth/register | Method=POST | Status=409 | Duration=8 ms | Request={
+  "username": "gobinath_anbazhagan",
+  "password": "Anbu@1234",
+  "email": "gobinathAnbu@gmail.com",
+  "roles": ["ADMIN", "USER"]
+} | Response={"status_details":{"responseDetails":{"details":"Please try a different username.","message":"Username is already taken"},"timestamp":"2025-01-11T12:31:45.221900300Z","status":"CONFLICT","statusCode":409}}
+2025-01-11 18:01:45 - Logged Request and Response for URI: /auth/register
+2025-01-11 18:01:53 - API=/auth/register | Method=POST | Status=409 | Duration=10 ms | Request={
+  "username": "gobinath_anbazhagan",
+  "password": "Anbu@1234",
+  "email": "gobinathAnbu@gmail.com",
+  "roles": ["ADMIN", "USER"]
+} | Response={"status_details":{"responseDetails":{"details":"Please try a different username.","message":"Username is already taken"},"timestamp":"2025-01-11T12:31:53.217952100Z","status":"CONFLICT","statusCode":409}}
+2025-01-11 18:01:53 - Logged Request and Response for URI: /auth/register
+2025-01-11 18:11:16 - Commencing graceful shutdown. Waiting for active requests to complete
+2025-01-11 18:11:17 - Graceful shutdown complete
+2025-01-11 18:11:17 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-01-11 18:11:17 - HikariPool-1 - Shutdown initiated...
+2025-01-11 18:11:17 - HikariPool-1 - Shutdown completed.

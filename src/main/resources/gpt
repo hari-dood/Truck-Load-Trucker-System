@@ -1,0 +1,195 @@
+ @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name = "street_name", nullable = false, length = 100)
+    private String streetName;
+
+    @Column(name = "house_number", nullable = false, length = 50)
+    private String houseNumber;
+
+    @Column(name = "post", nullable = false, length = 50)
+    private String post;
+
+    @Column(name = "district", nullable = false, length = 50)
+    private String district;
+
+    @Column(name = "pin_code", nullable = false, length = 10)
+    private String pinCode;
+
+    @OneToOne(mappedBy = "address")
+    private DriverInfo driverInfo;
+
+
+
+      @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
+
+        @Column(name = "first_name", nullable = false, length = 50)
+        private String firstName;
+
+        @Column(name = "full_name", nullable = false, length = 100)
+        private String fullName;
+
+        @Column(name = "contact_number", nullable = false, length = 15, unique = true)
+        private String contactNumber;
+
+        @Column(name = "experience", nullable = false)
+        private String experience;
+
+        @Column(name = "licence_no", nullable = false, unique = true, length = 20)
+        private String licenceNo;
+
+        @Column(name = "aadhar_card_no", nullable = false, unique = true, length = 16)
+        private String aadharCardNo;
+
+        @OneToOne
+        @JoinColumn(name = "address_id", referencedColumnName = "id")
+        private Address address;
+
+        @OneToMany(mappedBy = "drivers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        private List<TripDetails> tripDetails;
+
+
+        @Column(name = "month", nullable = false, length = 20)
+            private String month;
+
+            @Column(name = "loading_date", nullable = false)
+            private LocalDate loadingDate;
+
+            @Column(name = "trip_start_date", nullable = false)
+            private LocalDate tripStartDate;
+
+            @Column(name = "trip_end_date", nullable = false)
+            private LocalDate tripEndDate;
+
+            @Column(name = "payment_status", nullable = false, length = 20)
+            private String paymentStatus;
+
+            @Column(name = "loading_point", nullable = false, length = 50)
+            private String loadingPoint;
+
+            @Column(name = "delivery_point", nullable = false, length = 50)
+            private String deliveryPoint;
+
+            @Column(name = "load_quantity", nullable = false, length = 30)
+            private String loadQuantity;
+
+            @Column(name = "goods_description", nullable = false, length = 100)
+            private String goodsDescription;
+
+            @Column(name = "load_amount", nullable = false)
+            private Integer loadAmount;
+
+            @Column(name = "load_advance", nullable = false)
+            private Integer loadAdvance;
+
+            @Column(name = "weight_bridge", nullable = false)
+            private Integer weightBridge;
+
+            @Column(name = "broker_amount", nullable = false)
+            private Integer brokerAmount;
+
+            @Column(name = "up_amount", nullable = false)
+            private Integer upAmount;
+
+            @Column(name = "down_amount", nullable = false)
+            private Integer downAmount;
+
+            @Column(name = "toll_amount", nullable = false)
+            private Integer tollAmount;
+
+            @Column(name = "diesel_expenses", nullable = false)
+            private Integer dieselExpenses;
+
+            @Column(name = "rto_amount", nullable = false)
+            private Integer rtoAmount;
+
+            @Column(name = "pc_amount", nullable = false)
+            private Integer pcAmount;
+
+            @Column(name = "others_expenses", nullable = false)
+            private Integer othersExpenses;
+
+            @Column(name = "total_expenses", nullable = false)
+            private Integer totalExpenses;
+
+            @ManyToOne
+            @JoinColumn(name = "driver_id", nullable = false) // Foreign key to DriverInfo
+            private DriverInfo driver; // Corrected field name
+
+
+            public class DataBackup implements Serializable {
+                private static final long serialVersionUID = 1L;
+
+                @Id
+                @GeneratedValue(strategy = GenerationType.IDENTITY)
+                private Integer tripSno;
+
+                @Column(name = "driverId", nullable = false, length = 20)
+                private Long driverId;
+
+                @Column(name = "month", nullable = false, length = 20)
+                private String month;
+
+                @Column(name = "loading_date", nullable = false)
+                private LocalDate loadingDate;
+
+                @Column(name = "trip_start_date", nullable = false)
+                private LocalDate tripStartDate;
+
+                @Column(name = "trip_end_date", nullable = false)
+                private LocalDate tripEndDate;
+
+                @Column(name = "payment_status", nullable = false, length = 20)
+                private String paymentStatus;
+
+                @Column(name = "loading_point", nullable = false, length = 50)
+                private String loadingPoint;
+
+                @Column(name = "delivery_point", nullable = false, length = 50)
+                private String deliveryPoint;
+
+                @Column(name = "load_quantity", nullable = false, length = 30)
+                private String loadQuantity;
+
+                @Column(name = "goods_description", nullable = false, length = 100)
+                private String goodsDescription;
+
+                @Column(name = "load_amount", nullable = false)
+                private Integer loadAmount;
+
+                @Column(name = "load_advance", nullable = false)
+                private Integer loadAdvance;
+
+                @Column(name = "weight_bridge", nullable = false)
+                private Integer weightBridge;
+
+                @Column(name = "broker_amount", nullable = false)
+                private Integer brokerAmount;
+
+                @Column(name = "up_amount", nullable = false)
+                private Integer upAmount;
+
+                @Column(name = "down_amount", nullable = false)
+                private Integer downAmount;
+
+                @Column(name = "toll_amount", nullable = false)
+                private Integer tollAmount;
+
+                @Column(name = "diesel_expenses", nullable = false)
+                private Integer dieselExpenses;
+
+                @Column(name = "rto_amount", nullable = false)
+                private Integer rtoAmount;
+
+                @Column(name = "pc_amount", nullable = false)
+                private Integer pcAmount;
+
+                @Column(name = "others_expenses", nullable = false)
+                private Integer othersExpenses;
+
+                @Column(name = "total_expenses", nullable = false)
+                private Integer totalExpenses;
+            }
