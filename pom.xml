@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.hariSolution</groupId>
-	<artifactId>Truck-load-Tracking-system</artifactId>
+	<artifactId>Truck_Load_Tracker_System</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Truck-load-management-system</name>
 	<description>To manage the truck load related data</description>

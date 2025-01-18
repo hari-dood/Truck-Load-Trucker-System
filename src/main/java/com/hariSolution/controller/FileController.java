@@ -17,45 +17,49 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.ByteArrayOutputStream;
 
-@RestController
-@RequiredArgsConstructor
-@RequestMapping("/api/v1/file")
+@RestController  // Marks the class as a Spring REST controller to handle HTTP requests
+@RequiredArgsConstructor  // Automatically generates a constructor for required final fields (fileTransferService)
+@RequestMapping("/api/v1/file")  // Specifies the base URL path for file-related operations
 public class FileController {
-    private final FileTransferService fileTransferService;
+    private final FileTransferService fileTransferService;  // Service to handle file upload and download logic
 
-    @PostMapping(value = "/upload", produces = "application/json")
+    // Endpoint for uploading a file
+    @PostMapping(value = "/upload", produces = "application/json")  // Maps POST requests to /api/v1/file/upload
     public FileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         try {
+            // Calls the service to save the file to the database and retrieves the file properties
             FileProperties fileProperties = this.fileTransferService.saveFileToDataBase(file);
 
+            // Generates the file's download URL
             String downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path("/api/v1/file/download/")
-                    .path(String.valueOf(fileProperties.getId()))
+                    .path("/api/v1/file/download/")  // Defines the base path for the download URL
+                    .path(String.valueOf(fileProperties.getId()))  // Appends the file ID to the URL
                     .toUriString();
 
+            // Returns a response with the file details: name, download URL, file type, and file size
             return new FileResponse(
-                    fileProperties.getFileName(),
-                    downloadUrl,
-                    fileProperties.getFileType(),
-                    file.getSize()
+                    fileProperties.getFileName(),  // File name
+                    downloadUrl,  // Generated download URL
+                    fileProperties.getFileType(),  // File type (MIME type)
+                    file.getSize()  // File size in bytes
             );
 
-
         } catch (Exception e) {
-
+            // If an error occurs, throw an exception with a custom error message and internal server error status
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed.", e);
         }
     }
 
-
-    @GetMapping("/download/{file-id}")
+    // Endpoint for downloading a file by its ID
+    @GetMapping("/download/{file-id}")  // Maps GET requests to /api/v1/file/download/{file-id}
     public ResponseEntity<ByteArrayResource> downloadFromDataBase(@PathVariable("file-id") Long fileId) throws Exception {
+        // Calls the service to retrieve the file's properties from the database using the file ID
         FileProperties fileProperties = this.fileTransferService.downloadFromDataBase(fileId);
 
+        // Builds the response with the file content as a ByteArrayResource
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(fileProperties.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileProperties.getFileName() + "\"")
-                .body(new ByteArrayResource(fileProperties.getData()));
-
+                .contentType(MediaType.parseMediaType(fileProperties.getFileType()))  // Sets the correct content type (MIME type)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileProperties.getFileName() + "\"")  // Defines the filename in the content-disposition header
+                .body(new ByteArrayResource(fileProperties.getData()));  // Sets the file data as the response body
     }
 }

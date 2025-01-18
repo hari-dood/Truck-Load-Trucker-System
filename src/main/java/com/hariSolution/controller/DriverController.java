@@ -9,53 +9,63 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-@RequestMapping("/api/v1/driver")
-@RequiredArgsConstructor
+@RestController  // Marks the class as a Spring REST controller to handle HTTP requests
+@RequestMapping("/api/v1/driver")  // Specifies the base URL path for all the endpoints in this controller
+@RequiredArgsConstructor  // Automatically generates a constructor for required final fields (driverService and responseService)
 public class DriverController {
 
-    private final DriverService driverService;
-    private final DataResponseMapper responseService;
+    private final DriverService driverService;  // DriverService handles business logic related to driver operations
+    private final DataResponseMapper responseService;  // Maps the response into a DataResponse format for consistent response structure
 
-    @PostMapping("/create")
+    // Endpoint for creating driver information
+    @PostMapping("/create")  // Maps POST requests sent to /api/v1/driver/create
     public ResponseEntity<DataResponse> createDriverInformation(@RequestBody @Valid DriverInfoDTO driverDTO) {
-        // Calls the service to handle driver creation logic
+        // The @Valid annotation ensures that the input data in the request body is validated against the DriverInfoDTO class constraints
+        // The method calls the driverService to handle driver creation logic
         return driverService.createDriverInformation(driverDTO);
     }
 
-    @GetMapping("/get-allDrivers")
+    // Endpoint to get information of all drivers
+    @GetMapping("/get-allDrivers")  // Maps GET requests to /api/v1/driver/get-allDrivers
     public ResponseEntity<DataResponse> getDriverAllInformation() {
-        // Calls the service to fetch all driver information
+        // Calls the driverService to retrieve all driver information from the database
         DataResponse response = driverService.getDriverAllInformation();
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);  // Returns a successful response with HTTP status 200 (OK)
     }
 
-    @GetMapping("/get/{firstName}")
+    // Endpoint to get driver information by first name
+    @GetMapping("/get/{firstName}")  // Maps GET requests to /api/v1/driver/get/{firstName}
     public ResponseEntity<DataResponse> getDriverFirstName(@PathVariable("firstName") @Valid String firstName) {
-        // Calls the service to fetch driver information by firstName
+        // The @PathVariable annotation binds the {firstName} part of the URL to the method parameter
+        // @Valid ensures the value of the firstName is validated
+        // Retrieves driver information based on the provided first name and returns the data in a response
         DataResponse response = driverService.getDriverFirstName(firstName);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);  // Returns the driver data with HTTP status 200 (OK)
     }
 
-    @GetMapping("/in/{firstName}")
+    // Endpoint to find all drivers with a first name (case-insensitive)
+    @GetMapping("/in/{firstName}")  // Maps GET requests to /api/v1/driver/in/{firstName}
     public ResponseEntity<DataResponse> findAllByFirstNameInIgnoreCase(@PathVariable("firstName") @Valid String firstName) {
-        // Calls the service to fetch drivers based on firstName in ignore case
+        // This method fetches all drivers whose first name matches the input string, ignoring case
+        // The @PathVariable annotation binds the URL parameter to the method argument
         DataResponse response = driverService.findAllByFirstNameInIgnoreCase(firstName);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(response);  // Returns the response containing the matched drivers with HTTP status 200 (OK)
     }
 
-    @PostMapping("/update/{id}")
+    // Endpoint to update driver information
+    @PostMapping("/update/{id}")  // Maps POST requests to /api/v1/driver/update/{id}
     public ResponseEntity<DataResponse> updateDriverInformation(
-            @PathVariable("id") Integer id,
-            @RequestParam("firstName") String firstName,
-            @RequestParam("fullName") String fullName,
-            @RequestParam("contactNumber") String contactNumber,
-            @RequestParam("email") String email,
-            @RequestParam("experience") String experience,
-            @RequestParam("licenceNo") String licenceNo,
-            @RequestParam("aadhaarNo") String aadhaarNo
+            @PathVariable("id") Integer id,  // Extracts the driver ID from the URL path
+            @RequestParam("firstName") String firstName,  // Extracts the first name from the request parameters
+            @RequestParam("fullName") String fullName,  // Extracts the full name from the request parameters
+            @RequestParam("contactNumber") String contactNumber,  // Extracts the contact number from the request parameters
+            @RequestParam("email") String email,  // Extracts the email from the request parameters
+            @RequestParam("experience") String experience,  // Extracts the experience from the request parameters
+            @RequestParam("licenceNo") String licenceNo,  // Extracts the driver's license number from the request parameters
+            @RequestParam("aadhaarNo") String aadhaarNo  // Extracts the Aadhaar number from the request parameters
     ) {
-        // Calls the service to update driver information
+        // Calls the driverService to update the driver information with the given details
+        // The driver ID is provided as part of the URL, and other details are passed as request parameters
         return driverService.updatedDriverInformation(id, firstName, fullName, contactNumber, email, experience, licenceNo, aadhaarNo);
     }
 }
