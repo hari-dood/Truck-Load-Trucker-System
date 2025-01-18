@@ -92,4 +92,4 @@ Before you begin, ensure that you have the following installed:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/truck-load-tracker-system.git
+   https://github.com/hari-dood/Truck-Load-Trucker-System.git
